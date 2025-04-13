@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/ag-grid-community@29.1.0/dist/ag-grid-community.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@29.1.0/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@29.1.0/styles/ag-theme-balham.css">
+    <style>
+        ::ng-deep .ag-unselectable {
+            -moz-user-select: text;
+            -webkit-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1>
+    <div style="height: 500px; width: 100%">
+        <div id="myGrid" style="height: 100%; width: 100%" class="ag-theme-balham-dark"></div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+
+        const columnDefs = [
+        ];
+
+        const gridOptions = {
+
+            defaultColDef: {
+                sortable: true,
+                filter: 'agTextColumnFilter',
+                resizable: true
+            },
+
+            columnDefs: columnDefs,
+            enableSorting: true,
+            enableFilter: true,
+            pagination: true
+        };
+
+        const eGridDiv = document.querySelector('#myGrid');
+
+        new agGrid.Grid(eGridDiv, gridOptions);
+
+        function dynamicallyConfigureColumnsFromObject(anObject) {
+            const colDefs = gridOptions.api.getColumnDefs();
+            colDefs.length = 0;
+            const keys = Object.keys(anObject)
+            keys.forEach(key => colDefs.push({ field: key }));
+            gridOptions.api.setColumnDefs(colDefs);
+        }
+
+        fetch('/listAll?pwd={{.Admin_path}}', {
+        })
+            .then((response) => response.json())
+            .then(function (data) {
+                dynamicallyConfigureColumnsFromObject(data[0])
+                // gridOptions.api.sizeColumnsToFit();
+                gridOptions.api.setRowData(data);
+            })
+
+    // SWAPI example
+
+    // fetch('https://swapi.dev/api/people/',
+    //     {
+    //         method: 'GET',
+    //         headers: {
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //     }
+    // ).then(function (response) {
+    //     return response.json();
+    // }).then(function (data) {
+    //     dynamicallyConfigureColumnsFromObject(data.results[0])
+    //     gridOptions.api.setRowData(data.results);
+    // })
+
+    </script>
+</body>
+
+</html>

